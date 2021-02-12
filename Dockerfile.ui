@@ -1,0 +1,20 @@
+FROM mcr.microsoft.com/dotnet/sdk:5.0 AS builder
+WORKDIR /source
+
+COPY . .
+
+# Change the Directory
+WORKDIR /source/
+
+# aspnet-core
+RUN dotnet restore src/UI/ECommerce.UI/ECommerce.UI.csproj
+RUN dotnet publish src/UI/ECommerce.UI/ECommerce.UI.csproj --output /ecommerceui/ --configuration Release
+
+## Runtime
+FROM mcr.microsoft.com/dotnet/aspnet:5.0
+
+# Change the Directory
+WORKDIR /ecommerceui
+
+COPY --from=builder /ecommerceui .
+ENTRYPOINT ["dotnet", "ECommerce.UI.dll"]

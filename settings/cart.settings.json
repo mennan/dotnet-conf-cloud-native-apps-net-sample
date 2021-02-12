@@ -1,0 +1,13 @@
+{
+  "Redis": {
+    "Host": "10.106.136.94",
+    "Port": 5001,
+    "Password": null
+  },
+  "ApiSettings": {
+    "Catalog": {
+      "Url": "http://10.99.223.88:5703"
+    }
+  },
+  "ElasticSearchUrl": "http://10.100.232.250:9200"
+}

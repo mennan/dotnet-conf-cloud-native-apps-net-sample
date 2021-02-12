@@ -1,0 +1,28 @@
+@model List<CartDetailsDto>
+@{
+    ViewData["Title"] = "Cart";
+}
+
+<table class="table table-responsive table-striped">
+    <thead>
+    <tr>
+        <th></th>
+        <th>Name</th>
+        <th>Price</th>
+        <th>Quantity</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var product in Model)
+    {
+        <tr>
+            <td>
+                <img src="https://www.wilddesignz.com/image/cache/catalog/placeholderproduct-500x500.png" class="img-thumbnail">
+            </td>
+            <td>@product.Name</td>
+            <td>@product.Price</td>
+            <td>@product.Quantity</td>
+        </tr>
+    }
+    </tbody>
+</table>

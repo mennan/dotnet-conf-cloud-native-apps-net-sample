@@ -1,0 +1,14 @@
+@model ProductDto
+@{
+    ViewData["Title"] = Model.Name;
+}
+
+<div class="card">
+    <img src="https://www.wilddesignz.com/image/cache/catalog/placeholderproduct-500x500.png" class="card-img-top">
+    <div class="card-body">
+        <h5 class="card-title">@Model.Name</h5>
+        <p class="card-text">@Model.Description</p>
+        <small>@Model.Price TL</small>
+        <a href="@Url.Action("Add", "Cart", new {id = @Model.Id})" class="btn btn-block btn-primary">Add to cart</a>
+    </div>
+</div>

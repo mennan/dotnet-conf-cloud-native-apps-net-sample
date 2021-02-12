@@ -1,0 +1,20 @@
+﻿@model List<ProductDto>
+@{
+    ViewData["Title"] = "Products";
+}
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-sm">
+            <div class="card">
+                <img src="https://www.wilddesignz.com/image/cache/catalog/placeholderproduct-500x500.png" class="card-img-top">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">@product.Description</p>
+                    <a href="@Url.Action("Detail", "Product", new { id = @product.Id })" class="btn btn-block btn-primary">Product Details</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>

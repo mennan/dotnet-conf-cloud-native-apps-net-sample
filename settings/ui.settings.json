@@ -1,0 +1,11 @@
+{
+  "ElasticSearchUrl": "http://10.100.232.250:9200",
+  "ApiSettings": {
+    "Cart": {
+      "Url": "http://10.98.178.179:5701"
+    },
+    "Catalog": {
+      "Url": "http://10.99.223.88:5703"
+    }
+  }
+}

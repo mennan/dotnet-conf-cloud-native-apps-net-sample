@@ -1,0 +1,6 @@
+{
+  "ConnectionStrings": {
+    "Default": "Server=10.111.213.157;Port=5002;Database=ecommercecatalog;User Id=postgres;Password=1234567890;"
+  },
+  "ElasticSearchUrl": "http://10.100.232.250:9200"
+}

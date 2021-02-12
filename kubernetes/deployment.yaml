@@ -1,0 +1,160 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cart-master
+  labels:
+    app: cart
+spec:
+  selector:
+    matchLabels:
+      app: cart
+      role: master
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: cart
+        role: master
+        tier: backend
+    spec:
+      containers:
+        - name: master
+          image: ecommercecart
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: settings
+              mountPath: /ecommercecart/settings
+      volumes:
+        - name: settings
+          secret:
+            secretName: secret-cart
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cart-master
+  labels:
+    app: cart
+    role: master
+    tier: backend
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  clusterIP: 10.98.178.179
+  ports:
+    - port: 5701
+      targetPort: 80
+  selector:
+    app: cart
+    role: master
+    tier: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: catalog-master
+  labels:
+    app: catalog
+spec:
+  selector:
+    matchLabels:
+      app: catalog
+      role: master
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: catalog
+        role: master
+        tier: backend
+    spec:
+      containers:
+        - name: master
+          image: ecommercecatalog
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: settings-catalog
+              mountPath: /ecommercecatalog/settings
+      volumes:
+        - name: settings-catalog
+          secret:
+            secretName: secret-catalog
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: catalog-master
+  labels:
+    app: catalog
+    role: master
+    tier: backend
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  clusterIP: 10.99.223.88
+  ports:
+    - port: 5703
+      targetPort: 80
+  selector:
+    app: catalog
+    role: master
+    tier: backend
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ui-master
+  labels:
+    app: ui
+spec:
+  selector:
+    matchLabels:
+      app: ui
+      role: master
+      tier: backend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ui
+        role: master
+        tier: backend
+    spec:
+      containers:
+        - name: master
+          image: ecommerceui
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 80
+          volumeMounts:
+            - name: settings-ui
+              mountPath: /ecommerceui/settings
+      volumes:
+        - name: settings-ui
+          secret:
+            secretName: secret-ui
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: ui-master
+  labels:
+    app: ui
+    role: master
+    tier: backend
+spec:
+  type: LoadBalancer
+  externalTrafficPolicy: Local
+  ports:
+    - port: 5705
+      targetPort: 80
+  selector:
+    app: ui
+    role: master
+    tier: backend
